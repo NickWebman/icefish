@@ -1,0 +1,408 @@
+
+
+* { 
+	font-family: 'Open Sans', sans-serif;
+}
+
+body { 
+	margin: 0;
+	font-size: 12px;
+}
+
+h2 {
+	margin: 0;
+}
+
+h2.headline {
+	font-weight: 800;
+    font-size: 18px;
+    text-transform: uppercase;	
+    color: #999;
+}
+
+.left h2.headline {
+	float: left;
+    margin: 4px 20px 0 0;	
+}
+
+.right h2.headline {
+	margin: 0 0 10px 0;
+}
+
+.left {
+	float: left;
+	width: 400px;
+
+}
+
+.middle {
+	float: left;
+	width: 200px;
+}
+
+.right {
+	float: left;
+	width: 400px;
+}
+
+.character-bar-container, .status-bar-container {
+	
+}
+
+.character-bar {
+	padding: 10px 0;
+	width: 1000px;
+	background: #333;
+	color: #eee;
+	margin: 0 auto;
+	overflow: auto;
+}
+
+.status-bar {
+	padding: 10px 0;
+	clear: both;
+	width: 1000px;	
+	background: #666;
+	color: #eee;
+	margin: 0 auto;
+	overflow: auto;	
+}
+
+.character-bar div.level { float: right; }
+.character-bar div.xp { float: right; }
+
+.main-container {
+	width: 1000px;	
+	margin: 0 auto;
+}
+
+.character-bar div {
+	float: left;
+	padding: 0 15px;
+	border-right: 1px dotted #666;
+}
+
+.status-bar div {
+	float: left;
+	padding: 0 15px;
+	border-right: 1px dotted #999;
+}
+
+.character-bar div:last-child, .status-bar div:last-child {
+	border-right: none;
+}
+
+.button-stuff {
+	width: 125px;
+	margin: 50px auto;
+}
+
+.button-stuff  img {
+	width: 125px;
+	height: auto;
+}
+
+.controls {
+    margin-left: 16px;
+}
+
+.controls input {
+	margin-right: 2px;
+	color: #0084ff;
+}
+
+.controls input:disabled {
+	color: #bbb;
+}
+
+
+.box {
+	padding: 15px;
+	height: 35px;
+}
+
+.vertical-stuff {
+    margin: 15px 0 15px;
+}	
+
+.level-message {
+	display: none;
+	font-size: 100px;
+	vertical-align: center;
+}
+
+.fishing-hole {
+	background: #eee;
+	padding: 15px 15px;
+	height: 200px;
+	margin: 15px 0 15px 15px;
+}
+
+.stats {
+	background: #ddd;
+	padding: 15px 15px;
+	height: 200px;
+	margin: 15px 0 15px 15px;
+}
+
+.status {
+	background: #c4e3ff;
+	margin: 15px 0 0 15px;
+	padding: 15px;
+	transition: background 2s;
+}
+
+.status div:first-letter {
+	text-transform: uppercase;
+}
+
+.stats h2.headline {
+	margin-bottom: 10px;
+}
+
+.gear {
+	background: #ddd;
+}
+.bait {
+	background: #eee;
+}
+.items {
+	background: #ddd;
+}
+.livewell {
+	background: #eee;
+	padding: 15px;
+	margin-top: 15px;
+}
+
+.livewell .the-fish {
+    padding: 0 15px 0 1px;
+    margin: 40px 0 0 0;
+	overflow: auto;
+}
+
+.livewell .the-fish .fish {
+	background: url(images/fish.png) no-repeat;
+	background-size: 100%;
+	height: 21px;
+	width: 20px;
+	margin-right: 4px;
+	float: left;
+}
+
+
+.livewell .fish.xxs {
+	width: 10px;
+}
+
+.livewell .fish.xs {
+	width: 15px;
+}
+
+.livewell .fish.s {
+	width: 20px;
+}
+
+.livewell .fish.m {
+	width: 25px;
+}
+
+.livewell .fish.l {
+	width: 30px;
+}
+
+.livewell .fish.xl {
+	width: 35px;
+}
+
+.livewell .fish.xxl {
+	width: 40px;
+}
+
+.livewell .fish.xxxl {
+	width: 45px;
+}
+
+
+.something {
+	background: #ddd;
+}
+.der {
+	background: #eee;
+}
+
+.bait label:last-child {
+	margin-right: 0;
+}
+
+.casts-list {
+	margin: 15px 0 0 15px;
+    height: 377px;
+    overflow: hidden;	
+}
+
+.casts-list div {
+	padding: 5px 10px;
+}
+
+.casts-list div:nth-child(odd) {
+	background: #ddd;
+}
+
+.casts-list div:nth-child(even) {
+	background: #eee;
+}
+
+
+
+.fishing-hole {
+	position: relative;
+	height: 125px;
+}
+
+.fishing-hole .hole {
+	background-image: url('images/fishing-hole.png');
+	background-size: 100px;
+	background-repeat: no-repeat;
+    width: 100px;
+    height: 17px;
+    position: absolute;
+    bottom: 20px;
+    left: 41px;
+}
+
+.fishing-hole .hole .value {
+	position: relative;
+	text-align: center;
+}
+
+input[type=radio], input[type=checkbox] {
+	display:none;
+}
+ 
+input[type=radio] + label, input[type=checkbox] + label  {
+	background-repeat: no-repeat;
+	display:inline-block;
+	padding: 0 0 0 0px;
+	margin: 0 10px;
+}
+
+input[type=radio]:checked + label, input[type=checkbox]:checked + label  {
+	background-repeat: no-repeat;
+	display:inline-block;
+	padding: 0 0 0 0px;
+	margin: 0 10px;	
+}
+
+.bait input[type=radio]#worm + label {
+	background-image: url('images/worm.png');
+    width: 52px;
+    height: 33px;
+    margin-left: 0;
+    background-size: 52px;
+  
+}
+
+.bait input[type=radio]#worm:checked + label {
+	background-image: url('images/worm-on.png');
+    width: 52px;
+    height: 33px;
+    margin-left: 0;
+    background-size: 52px;
+}
+
+.bait input[type=radio]#minnow + label {
+	background-image: url('images/minnow.png');
+    width: 56px;
+    height: 33px;
+    background-size: 56px;
+}
+
+.bait input[type=radio]#minnow:checked + label {
+	background-image: url('images/minnow-on.png');
+    width: 56px;
+    height: 33px;
+    background-size: 56px;
+}
+
+.bait input[type=radio]#hotdog + label {
+	background-image: url('images/hotdog.png');
+    width: 37px;
+    height: 42px;
+    background-size: 37px;
+}
+
+.bait input[type=radio]#hotdog:checked + label {
+	background-image: url('images/hotdog-on.png');
+    width: 37px;
+    height: 42px;
+    background-size: 37px;
+}
+
+.gear input[type=checkbox]#ice-picks + label {
+	background-image: url('images/ice-picks.png');
+	width: 39px;
+	height: 35px;
+	margin-left: 0;
+  
+}
+
+.gear input[type=checkbox]#ice-picks:checked + label {
+	background-image: url('images/ice-picks-on.png');
+	width: 39px;
+	height: 35px;
+	margin-left: 0;
+}
+
+.gear input[type=checkbox]#tip-up + label {
+	background-image: url('images/tip-up.png');
+	width: 39px;
+	height: 35px;
+  
+}
+
+.gear input[type=checkbox]#tip-up:checked + label {
+	background-image: url('images/tip-up-on.png');
+	width: 39px;
+	height: 35px;
+}
+
+.gear input[type=checkbox]#high-test + label {
+	background-image: url('images/high-test.png');
+	width: 39px;
+	height: 35px;
+  
+}
+
+.gear input[type=checkbox]#high-test:checked + label {
+	background-image: url('images/high-test-on.png');
+	width: 39px;
+	height: 35px;
+}
+
+.items input[type=checkbox]#smoke + label {
+	background-image: url('images/smoke.png');
+	width: 40px;
+	height: 37px;
+	margin-left: 0;
+}
+
+.items input[type=checkbox]#smoke:checked + label {
+	background-image: url('images/smoke-on.png');
+	width: 40px;
+	height: 37px;
+	margin-left: 0;	
+}
+
+.items input[type=checkbox]#whiskey + label {
+	background-image: url('images/whiskey.png');
+    width: 27px;
+    height: 37px;
+  
+}
+
+.items input[type=checkbox]#whiskey:checked + label {
+	background-image: url('images/whiskey-on.png');
+    width: 27px;
+    height: 37px;
+}

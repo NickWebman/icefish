@@ -1,0 +1,59 @@
+/* Slideshow */
+#Slideshow {
+  width: 620px;
+  float: left;
+  margin-right: 14px;
+}
+
+.bx-wrapper {
+	margin: auto;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none; 
+    box-shadow: none; 
+    border: none; 
+}
+
+.bx-wrapper .bx-viewport { 
+	box-shadow: none;
+	border: none;
+	left: 0;
+}
+
+.bx-wrapper .bx-controls {
+    position: relative;
+    z-index: 9999;
+    top: -250px;
+}
+
+.bx-wrapper .bx-pager {
+	top: 15px;
+	text-align: right;
+	right: 38px;
+}
+
+.bx-viewport {
+/*	height: 250px;*/
+}
+
+.bx-viewport img { 
+	height: 250px;
+}
+
+.bx-wrapper .bx-pager.bx-default-pager a, .bx-wrapper .bx-pager.bx-default-pager a:hover {
+	padding: 3px 7px;
+    display: inline;
+	background: #b5bf00;
+	color: #fff;
+	border-radius: 50%;
+	font-size: 1.5rem;
+	text-align: center;
+	text-indent: 0;
+	text-decoration: none;
+    width: 20px;
+    height: 20px;
+    margin: 0 3px;
+}
+
+.bx-wrapper .bx-pager.bx-default-pager a.active {
+	background: #0072cf;
+}
