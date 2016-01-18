@@ -44,6 +44,20 @@ $(document).ready(function(){
 	$(".name .value").text(localStorage.name);
 	$(".weight .value").text(localStorage.weight);	
 	
+	var event = false;
+	var eventName = "";
+	var eventMath = 0;
+	var eventTriggerMath = 0;
+	var eventCastListMessage = "";
+	var eventXp = 0;
+	
+	var morale = 100;
+	var hunger = 0;
+	
+	var insanityPoints = 0;
+	var niceGuyPoints = 0;
+	var dickPoints = 0;
+	
 	var casts = 0;
 	var fishBite = false;
 	var fishOn = false;
@@ -72,46 +86,47 @@ $(document).ready(function(){
 	$("#SetHookButton").prop("disabled", true);
 	$("#ReelInButton").prop("disabled", true);
 	
-	$("#CastButton").click(function(){
+	
+	// functions
+
+	// this function triggers when an event (special fish) dialogue is completed. It handles messages and resets the playfield, kind of.  
+	function keepFishing(){
+		$("#KeepFishingButton").click(function(){
+			$(".status .value").html("Let's keep fishing...");
+			$(".level-message .value").hide("slow");
+			$("#CastButton").prop("disabled", false);
+			$("#SetHookButton").prop("disabled", true);
+			$("#ReelInButton").prop("disabled", true);
+			$('.casts-list').prepend('<div><span>cast #' + casts + ': </span>'+ eventCastListMessage +' +'+ eventXp +'xp</div>')				
+		});
+	}
+	
+	function levelUpDisplay(){
+		$(".level-message .value").text("You leveled up!");
+		$(".level-message .value").show("slow").delay(2000).slideUp("slow");		
+	}
+
+	// clicks
+	
+	$("#CastButton").click(function(){		
 		
         casts += 1;
         $(".casts .value").text(casts);
 		
-		$(".status div").hide();
-		$(".status div").fadeIn();
+		$(".status .value").hide();
+		$(".status .value").fadeIn();
 		
 		// generate a cast # from 1-100. Factor in the player's "focus".
 		var cast = Math.floor((Math.random() * 100) + 1);	
 		var fishTypeMath = Math.floor((Math.random() * 100) + 1);
 		var fishSizeMath = Math.floor((Math.random() * 100) + 1);
 			fishSize = fishSizeMath;
-		
-		// determine fishSizeName
-		
-		// turn these big if statements into switch statements once shit works
-		if (fishSizeMath >= 95) {
-			fishSizeName = "xxl";
-		} else if (fishSizeMath >= 85 && fishSizeMath < 95) {
-			fishSizeName = "xxl";
-		} else if (fishSizeMath >= 75 && fishSizeMath < 85) {
-			fishSizeName = "xl";
-		} else if (fishSizeMath >= 60 && fishSizeMath < 75) {
-			fishSizeName = "l";
-		} else if (fishSizeMath >= 45 && fishSizeMath < 60) {
-			fishSizeName = "m";
-		} else if (fishSizeMath >= 30 && fishSizeMath < 45) {
-			fishSizeName = "s";
-		} else if (fishSizeMath >= 15 && fishSizeMath < 30) {
-			fishSizeName = "xs";
-		} else if (fishSizeMath >= 0 && fishSizeMath < 15) {
-			fishSizeName = "xxs";
-		}				
+
 		
 		// determine type of fish
 		
-		// turn these big if statements into switch statements once shit works
 		if (fishTypeMath >= 95) {
-			fishType = "merman";
+			fishType = "mega shark";
 		} else if (fishTypeMath >= 90 && fishTypeMath < 95) {
 			fishType = "pike";
 		} else if (fishTypeMath >= 80 && fishTypeMath < 90) {
@@ -133,8 +148,70 @@ $(document).ready(function(){
 		} else if (fishTypeMath >= 0 && fishTypeMath < 10) {
 			fishType = "bluegill";
 		}		
+
+		
+		
+		switch (fishType) {
+			case "mega shark":
+				fishSize = fishSize * 1;
+				break;
+			case "pike":
+				fishSize = fishSize * .5;
+				break;
+			case "walleye":
+				fishSize = fishSize * .4;
+				break;
+			case "large mouth bass":
+				fishSize = fishSize * .33;
+				break;
+			case "small mouth bass":
+				fishSize = fishSize * .3;
+				break;
+			case "cat fish":
+				fishSize = fishSize * .5;
+				break;					
+			case "carp":
+				fishSize = fishSize * .5;
+				break;
+			case "crappie":
+				fishSize = fishSize * .2;
+				break;
+			case "perch":
+				fishSize = fishSize * .2;
+				break;
+			case "sun fish":
+				fishSize = fishSize * .15;
+				break;
+			case "bluegill":
+				fishSize = fishSize * .15;
+				break;					
+		}
+		
+		fishSize = Math.round(fishSize);
 		
 
+		// determine fishSizeName
+		
+
+		if (fishSize >= 95) {
+			fishSizeName = "xxl";
+		} else if (fishSize >= 85 && fishSize < 95) {
+			fishSizeName = "xxl";
+		} else if (fishSize >= 75 && fishSize < 85) {
+			fishSizeName = "xl";
+		} else if (fishSize >= 60 && fishSize < 75) {
+			fishSizeName = "l";
+		} else if (fishSize >= 45 && fishSize < 60) {
+			fishSizeName = "m";
+		} else if (fishSize >= 30 && fishSize < 45) {
+			fishSizeName = "s";
+		} else if (fishSize >= 15 && fishSize < 30) {
+			fishSizeName = "xs";
+		} else if (fishSize >= 0 && fishSize < 15) {
+			fishSizeName = "xxs";
+		}			
+		
+		
 		// determine fish effect
 		
 		// determine boy/girl fish
@@ -151,14 +228,14 @@ $(document).ready(function(){
 		if (cast >= 20) {
 			bite = true;
 			biteCount += 1;
-			$(".status div").text("You got a bite!");
+			$(".status .value").text("You got a bite!");
 			$(".bites .value").text(biteCount);
 			$("#CastButton").prop("disabled", true);
 			$("#SetHookButton").prop("disabled", false);
 			$("#ReelInButton").prop("disabled", true);			
 		} else {
 			bite = false;
-			$(".status div").text("No bites. Cast again.");			
+			$(".status .value").text("No bites. Cast again.");			
 			$("#CastButton").prop("disabled", false);
 			$("#SetHookButton").prop("disabled", true);
 			$("#ReelInButton").prop("disabled", true);
@@ -171,46 +248,25 @@ $(document).ready(function(){
 	
 	$("#SetHookButton").click(function(){
 
-		$(".status div").hide();
-		$(".status div").fadeIn();
+		$(".status .value").hide();
+		$(".status .value").fadeIn();
 	
 		// logic for whether or not fish is hooked
 		
 		if (bite){
 			var fishOnMath = Math.floor((Math.random() * 100) + 1);
-			fishOnXp = Math.round(fishSize * .06);
 			
 			if (fishOnMath >= 30) {
 				fishOn = true;
 				fishOnCount += 1;
-				$(".status div").text("Fish on!");					
+				$(".status .value").text("Fish on!");					
 				$(".fish-on .value").text(fishOnCount);
 				$("#CastButton").prop("disabled", true);
 				$("#SetHookButton").prop("disabled", true);
 				$("#ReelInButton").prop("disabled", false);					
 			} else {
 				fishOn = false;
-				totalXp += fishOnXp;
-				$(".xp .value").text(totalXp);
-				$(".hole .value").text('+' + fishOnXp + 'xp');				
-				$('.xp .value').animate({
-					color: "#0084ff"
-					}, 500)
-					.animate({
-						color: "#eee"        
-					}, 2000);
-				$(".hole .value").fadeIn(500).animate({
-					top: "-50px", 
-					fontSize: "+=10"
-					}, 1000, "easeOutBack")
-					.delay(800).fadeOut(400).animate({
-					top: "0px",
-					fontSize: "-=10"
-					}, 500, "easeInBack")
-
-				
-				
-				$(".status div").text(genderPronoun + " didn't take the bait");		
+				$(".status .value").text(genderPronoun + " didn't take the bait");		
 				$('.casts-list').prepend('<div><span>cast #' + casts + ': </span>You got a bite, but ' + genderPronoun + ' did not take the bait.</div>')					
 				$("#CastButton").prop("disabled", false);
 				$("#SetHookButton").prop("disabled", true);
@@ -224,110 +280,170 @@ $(document).ready(function(){
 
 	$("#ReelInButton").click(function(){
 
-		$(".status div").hide();
-		$(".status div").fadeIn();
-	
-		// logic for whether or not fish is caught
+		$(".status .value").hide();
+		$(".status .value").fadeIn();
 		
-		if (fishOn){
-			var fishCaughtMath = Math.floor((Math.random() * 100) + 1);
+		var eventTriggerMath = Math.floor((Math.random() * 100) + 1);
+		var eventMath = Math.floor((Math.random() * 100) + 1);		
 		
-			if (fishCaughtMath >= 30) {
-				fishCaught = true;
-				fishCaughtCount += 1;
-				fishCaughtXp = Math.round(fishSize * .5);
-				totalXp += fishCaughtXp;
-				$(".xp .value").text(totalXp);
-				$(".hole .value").text('+' + fishCaughtXp + 'xp');					
-				$('.xp .value').animate({
-					color: "#0084ff"
-					}, 500)
-					.animate({
-						color: "#eee"        
-					}, 2000);
-				$(".hole .value").fadeIn(500).animate({
-					top: "-50px", 
-					fontSize: "+=10"
-					}, 1000, "easeOutBack")
-					.delay(800).fadeOut(400).animate({
-					top: "0px",
-					fontSize: "-=10"
-					}, 500, "easeInBack")
-			
-					// turn these big if statements into switch statements once shit works
-			
-					if (totalXp >= 100 && level == 1) {
-						level = 2;
-						} else if (totalXp >= 200 && level == 2) {
-							level = 3;
-						} else if (totalXp >= 300 && level == 3) {
-							level = 4;
-						} else if (totalXp >= 400 && level == 4) {
-							level = 5;
-						} else if (totalXp >= 600 && level == 5) {
-							level = 6;
-						} else if (totalXp >= 800 && level == 6) {
-							level = 7;
-						} else if (totalXp >= 1000 && level == 7) {
-							level = 8;
-						} else if (totalXp >= 1400 && level == 8) {
-							level = 9;
-						} else if (totalXp >= 1800 && level == 9) {
-							level = 10;
-						} else if (totalXp >= 2300 && level == 10) {
-							level = 11;
-						}
-					
-					$(".level .value").text(level);
-					$(".level-message").text('You leveled up!');
-					$(".level-message").show("slow").slideUp("slow");
-					
-				$('.livewell .the-fish').prepend('<div class="fish '+ fishSizeName +' '+ fishType +'" title= "'+ fishSize +'in '+ gender +' '+ fishType +' "></div>');
-				$(".fish-caught .value").text(fishCaughtCount);
-				$('.status div').text('You caught a '+ fishSize +'" '+ gender +' '+ fishType +'!');
-				$('.casts-list').prepend('<div><span>cast #' + casts + ': </span>You caught a '+ fishSize +'" '+ gender +' '+ fishType +'!</div>')					
-				$("#CastButton").prop("disabled", false);
-				$("#SetHookButton").prop("disabled", true);
-				$("#ReelInButton").prop("disabled", true);					
-			} else {
-				fishCaught = false;
-				fishLost = true;
-				fishLostCount += 1;
-				fishLostXp = Math.round(fishSize * .1);
-				totalXp += fishLostXp;
-				$(".xp .value").text(totalXp);
-				$(".hole .value").text('+' + fishLostXp + 'xp');					
-				$('.xp .value').animate({
-					color: "#0084ff"
-					}, 500)
-					.animate({
-						color: "#eee"        
-					}, 2000);
-					//(selector).animate({styles},speed,easing,callback)
-					
-				$(".hole .value").fadeIn(500).animate({
-					top: "-50px", 
-					fontSize: "+=10"
-					}, 1000, "easeOutBack")
-					.delay(800).fadeOut(400).animate({
-					top: "0px",
-					fontSize: "-=10"
-					}, 500, "easeInBack")
-
-						
-				$(".status div").text(genderPronoun + " got away");
-				$('.casts-list').prepend('<div><span>cast #' + casts + ': </span>You hooked a ' + fishSize + '" ' + fishType + ', but ' + genderPronoun + ' got away.</div>')						
-				$(".fish-lost .value").text(fishLostCount);
-				$("#CastButton").prop("disabled", false);
-				$("#SetHookButton").prop("disabled", true);
-				$("#ReelInButton").prop("disabled", true);					
-			}
+		if (eventTriggerMath >= 50) {
+			event = true;
 		}
 		
-		//console.log("cast: " +cast+ " | fish on: " +fishOn+ " | fish lost: " +fishLost+ " | fish caught: " +fishCaught)
+		if (event){
+			
+			if (eventMath >= 95) {
+				eventName = "pregnant";
+			} else if (eventMath >= 85 && eventMath < 95) {
+				eventName = "pregnant";
+			} else if (eventMath >= 75 && eventMath < 85) {
+				eventName = "pregnant";
+			} else if (eventMath >= 60 && eventMath < 75) {
+				eventName = "pregnant";
+			} else if (eventMath >= 45 && eventMath < 60) {
+				eventName = "pregnant";
+			} else if (eventMath >= 30 && eventMath < 45) {
+				eventName = "pregnant";
+			} else if (eventMath >= 15 && eventMath < 30) {
+				eventName = "pregnant";
+			} else if (eventMath >= 0 && eventMath < 15) {
+				eventName = "pregnant";
+			}			
+			
+			switch (eventName) {
+				case "pregnant":
+					
+					$(".level-message .value").html("<span class='special'>This fish seems different...</span><div class='inner'>As you unhook the fish and open the livewell, she turns to you and pleads: \"Sir, I happen to be very pregnant. Are you sure you want to murder babies?\" </div><div class='answers'><input type='radio' name='pregnant' value='a'>Ok. I won't eat you.</input><input type='radio' name='pregnant' value='b'>Meh. I'm still going to eat you.<input type='radio' name='pregnant' value='c'>Stab her</div>");
+					$(".level-message .value").show("slow");
+
+					$(".answers a").click(function(){
+
+						if ($(this).hasClass("a")){
+							$(".status .value").html('That was nice of you <input id="KeepFishingButton" type="submit" class="button" value="Continue fishing">');							
+							$(".status .value input").show("slow").css('display', 'block');
+							$(this).addClass("active");
+							$(".answers a").not(this).addClass("unactive");		
+							eventXp = 80;
+							eventCastListMessage = "You caught a pregnant fish. You threw her back because you're a cool person.";
+							niceGuyPoints = niceGuyPoints + 1;
+							morale = morale + 1;
+							
+						} else if ($(this).hasClass("b")){
+							$(".status .value").html("You hastily explain the concept of a food chain. When the fish responds \"That's cool. Where am I on the food chain?\", you look her in the eye and promptly bite her head off. <input id='KeepFishingButton' type='submit' class='button' value='Continue fishing'>");							
+							$(".status .value input").show("slow").css('display', 'block');
+							$(this).addClass("active");
+							$(".answers a").not(this).addClass("unactive");									
+							eventCastListMessage = "You caught a pregnant fish. You explained the food chain and then ate her and her babies."
+							dickPoints = dickPoints + 1;
+							hunger = hunger + -10;
+							
+						} else if ($(this).hasClass("c")){
+							$(".status .value").html("Why would you do that? No, seriously. This is only a game, but what the fuck? Are you OK? <input id='KeepFishingButton' type='submit' class='button' value='Continue fishing'>");							
+							$(".status .value input").show("slow").css('display', 'block');
+							$(this).addClass("active");
+							$(".answers a").not(this).addClass("unactive");								
+							eventXp = -50;
+							eventCastListMessage = "You caught a pregnant fish. You chose to stab her for no reason. May God have mercy on your soul";
+							dickPoints = dickPoints + 1;
+							insanityPoints = insanityPoints + 1;
+						}
+						
+						keepFishing();
+						
+					});
+					
+					break;
+			}
+			
+
+
+			
+			
+		} else {		
 		
-	});	
-	
+			if (fishOn){
+				var fishCaughtMath = Math.floor((Math.random() * 100) + 1);
+			
+				if (fishCaughtMath >= 30) {
+					fishCaught = true;
+					fishCaughtCount += 1;
+					fishCaughtXp = Math.round(fishSize * .5);
+					totalXp += fishCaughtXp;
+					$(".xp .value").text(totalXp);
+					$(".hole .value").text('+' + fishCaughtXp + 'xp');					
+					$('.xp .value').animate({
+						color: "#0084ff"
+						}, 500)
+						.animate({
+							color: "#eee"        
+						}, 2000);
+					$(".hole .value").fadeIn(500).animate({
+						top: "-50px", 
+						fontSize: "+=10"
+						}, 1000, "easeOutBack")
+						.delay(800).fadeOut(400).animate({
+						top: "0px",
+						fontSize: "-=10"
+						}, 500, "easeInBack")		
+				
+						if (totalXp >= 100 && level == 1) {
+							level = 2;
+							levelUpDisplay();					
+							} else if (totalXp >= 200 && level == 2) {
+								level = 3;
+								levelUpDisplay();
+							} else if (totalXp >= 300 && level == 3) {
+								level = 4;
+								levelUpDisplay();	
+							} else if (totalXp >= 400 && level == 4) {
+								level = 5;
+								levelUpDisplay();	
+							} else if (totalXp >= 600 && level == 5) {
+								level = 6;
+								levelUpDisplay();	
+							} else if (totalXp >= 800 && level == 6) {
+								level = 7;
+								levelUpDisplay();	
+							} else if (totalXp >= 1000 && level == 7) {
+								level = 8;
+								levelUpDisplay();		
+							} else if (totalXp >= 1400 && level == 8) {
+								level = 9;
+								levelUpDisplay();	
+							} else if (totalXp >= 1800 && level == 9) {
+								level = 10;
+								levelUpDisplay();	
+							} else if (totalXp >= 2300 && level == 10) {
+								level = 11;
+								levelUpDisplay();	
+							}			
+						
+						$(".level .value").text(level);
+
+					$('.livewell .the-fish').prepend('<div class="fish '+ fishSizeName +' '+ fishType +'" title= "'+ fishSize +'in '+ gender +' '+ fishType +' "></div>');
+					$(".fish-caught .value").text(fishCaughtCount);
+					$('.status .value').text('You caught a '+ fishSize +'" '+ gender +' '+ fishType +'!');
+					$('.casts-list').prepend('<div><span>cast #' + casts + ': </span>You caught a '+ fishSize +'" '+ gender +' '+ fishType +'! +'+ fishCaughtXp +'xp</div>')					
+					$("#CastButton").prop("disabled", false);
+					$("#SetHookButton").prop("disabled", true);
+					$("#ReelInButton").prop("disabled", true);					
+				} else {
+					fishCaught = false;
+					fishLost = true;
+					fishLostCount += 1;					
+					$(".status .value").text(genderPronoun + " got away");
+					$('.casts-list').prepend('<div><span>cast #' + casts + ': </span>You hooked a ' + fishSize + '" ' + fishType + ', but ' + genderPronoun + ' got away.</div>')						
+					$(".fish-lost .value").text(fishLostCount);
+					$("#CastButton").prop("disabled", false);
+					$("#SetHookButton").prop("disabled", true);
+					$("#ReelInButton").prop("disabled", true);					
+				}
+			}
+			
+			//console.log("cast: " +cast+ " | fish on: " +fishOn+ " | fish lost: " +fishLost+ " | fish caught: " +fishCaught)
+			
+		};	
+	});
 	
 	
 });

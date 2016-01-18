@@ -64,7 +64,7 @@ h2.headline {
 	width: 1000px;	
 	background: #666;
 	color: #eee;
-	margin: 0 auto;
+	margin: 0 auto 15px auto;
 	overflow: auto;	
 }
 
@@ -122,20 +122,89 @@ h2.headline {
 }
 
 .vertical-stuff {
-    margin: 15px 0 15px;
+    margin: 0 0 15px 0;
 }	
 
-.level-message {
+.level-message  {
+	margin-left: 15px;
+}
+
+.level-message .value .inner  {
+    color: #333;
+    margin: 10px 0 10px 0;
+    font-weight: 400;
+}
+
+.level-message .value .answers a {
+    color: #333;
+	display: block;
+	cursor: pointer;
+}
+
+.level-message .value .answers a:hover {
+	color: #999;
+}
+
+.level-message .value .answers a span {
+	color: #0084ff;
+	font-weight: 700;
+}
+
+.level-message .value {
 	display: none;
-	font-size: 100px;
+	font-size: 12px;
+	font-weight: 700;
 	vertical-align: center;
+	color: #0084ff;
+	padding: 15px;
+}
+
+.outcome-message .value {
+	display: none;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	margin: 0 0 15px 15px;
 }
 
 .fishing-hole {
 	background: #eee;
 	padding: 15px 15px;
 	height: 200px;
-	margin: 15px 0 15px 15px;
+	margin: 0 0 15px 15px;
+}
+
+.level-message .value .answers a.unactive {
+	color: #999;
+	cursor: default;
+}
+
+.level-message .value .answers a.unactive span{
+	color: #999;
+	cursor: default;	
+}
+
+.level-message .value .answers a.active {
+	color: #333;
+}
+
+
+/*
+.level-message .value .answers a:not(.active) {
+	color: #ccc;
+}
+
+.level-message .value .answers a:not(.active) span {
+	color: #ccc;
+}*/
+
+
+.status .value input {
+	display: block;
+	display: none;
+	margin-top: 15px;
+	color: #0084ff;
+	
 }
 
 .stats {
@@ -147,9 +216,8 @@ h2.headline {
 
 .status {
 	background: #c4e3ff;
-	margin: 15px 0 0 15px;
+	margin: 0 0 0 15px;
 	padding: 15px;
-	transition: background 2s;
 }
 
 .status div:first-letter {
@@ -276,8 +344,13 @@ h2.headline {
 	text-align: center;
 }
 
+
+.answers input[type=radio],.answers input[type=checkbox] {
+	display: inline-block;
+}
+
 input[type=radio], input[type=checkbox] {
-	display:none;
+	display: none;
 }
  
 input[type=radio] + label, input[type=checkbox] + label  {
