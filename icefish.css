@@ -153,7 +153,7 @@ h2.headline {
 .level-message .value {
 	display: none;
 	font-size: 12px;
-	font-weight: 700;
+	font-weight: 800;
 	vertical-align: center;
 	color: #0084ff;
 	padding: 15px;
@@ -174,19 +174,10 @@ h2.headline {
 	margin: 0 0 15px 15px;
 }
 
-.level-message .value .answers a.unactive {
-	color: #999;
-	cursor: default;
+.level-message .value .answers input:disabled {
+	color: #ccc;
 }
 
-.level-message .value .answers a.unactive span{
-	color: #999;
-	cursor: default;	
-}
-
-.level-message .value .answers a.active {
-	color: #333;
-}
 
 
 /*
@@ -220,6 +211,10 @@ h2.headline {
 	padding: 15px;
 }
 
+.status .value {
+	
+}
+
 .status div:first-letter {
 	text-transform: uppercase;
 }
@@ -238,9 +233,15 @@ h2.headline {
 	background: #ddd;
 }
 .livewell {
+	background: #ddd;
+	padding: 15px;
+}
+
+.stuff {
 	background: #eee;
 	padding: 15px;
 	margin-top: 15px;
+	overflow: auto;
 }
 
 .livewell .the-fish {
@@ -344,9 +345,17 @@ h2.headline {
 	text-align: center;
 }
 
+.answers label {
+	display: block;
+	font-weight: 400;
+}
 
 .answers input[type=radio],.answers input[type=checkbox] {
 	display: inline-block;
+    top: 2px;
+    position: relative;
+    margin-left: 0;
+    margin-right: 6px;	
 }
 
 input[type=radio], input[type=checkbox] {

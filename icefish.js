@@ -286,11 +286,13 @@ $(document).ready(function(){
 		var eventTriggerMath = Math.floor((Math.random() * 100) + 1);
 		var eventMath = Math.floor((Math.random() * 100) + 1);		
 		
-		if (eventTriggerMath >= 50) {
+		if (eventTriggerMath >= 10) {
 			event = true;
 		}
 		
 		if (event){
+			
+			$("#ReelInButton").prop("disabled", true);	
 			
 			if (eventMath >= 95) {
 				eventName = "pregnant";
@@ -313,35 +315,41 @@ $(document).ready(function(){
 			switch (eventName) {
 				case "pregnant":
 					
-					$(".level-message .value").html("<span class='special'>This fish seems different...</span><div class='inner'>As you unhook the fish and open the livewell, she turns to you and pleads: \"Sir, I happen to be very pregnant. Are you sure you want to murder babies?\" </div><div class='answers'><input type='radio' name='pregnant' value='a'>Ok. I won't eat you.</input><input type='radio' name='pregnant' value='b'>Meh. I'm still going to eat you.<input type='radio' name='pregnant' value='c'>Stab her</div>");
+					$(".level-message .value").html("<span class='special'>This fish seems different...</span><div class='inner'>As you unhook the fish and open the livewell, she turns to you and pleads: \"Sir, I happen to be very pregnant. Are you sure you want to murder me and my babies?\" </div><div class='answers'><label><input type='radio' name='pregnant' value='a'>Ok. I won't eat you.</label><label><input type='radio' name='pregnant' value='b'>Meh. I'm still going to eat you.</label><label><input type='radio' name='pregnant' value='c'>Stab her</div></label>");
 					$(".level-message .value").show("slow");
 
-					$(".answers a").click(function(){
+					$(".answers input").click(function(){
 
-						if ($(this).hasClass("a")){
-							$(".status .value").html('That was nice of you <input id="KeepFishingButton" type="submit" class="button" value="Continue fishing">');							
+						if ($(this).val() == "a"){
+							$(".status .value").html('That was nice of you <input id="KeepFishingButton" type="submit" class="button" value="Continue fishing">');
+							$(".status .value").show("slow");							
 							$(".status .value input").show("slow").css('display', 'block');
-							$(this).addClass("active");
-							$(".answers a").not(this).addClass("unactive");		
+							$(".answers input").prop("disabled", true);
+							$(".answers input").not(this).addClass("disabled");								
 							eventXp = 80;
 							eventCastListMessage = "You caught a pregnant fish. You threw her back because you're a cool person.";
 							niceGuyPoints = niceGuyPoints + 1;
 							morale = morale + 1;
 							
-						} else if ($(this).hasClass("b")){
-							$(".status .value").html("You hastily explain the concept of a food chain. When the fish responds \"That's cool. Where am I on the food chain?\", you look her in the eye and promptly bite her head off. <input id='KeepFishingButton' type='submit' class='button' value='Continue fishing'>");							
+						} else if ($(this).val() == "b"){
+							$(".status .value").html("You sit the fish down and explain the concept of the food chain. When the fish responds \"That's cool. Where am I on the food chain?\", you look her in the eye and promptly bite into her face. <input id='KeepFishingButton' type='submit' class='button' value='Continue fishing'>");							
+							//$(".status .value").hide("slow");
+							$(".status .value .inner").show("slow");		
 							$(".status .value input").show("slow").css('display', 'block');
-							$(this).addClass("active");
-							$(".answers a").not(this).addClass("unactive");									
+							$(".answers input").prop("disabled", true);									
+							$(".answers input").not(this).addClass("disabled");								
+							eventXp = 80;							
 							eventCastListMessage = "You caught a pregnant fish. You explained the food chain and then ate her and her babies."
 							dickPoints = dickPoints + 1;
 							hunger = hunger + -10;
+							morale = morale + 1;
 							
-						} else if ($(this).hasClass("c")){
+						} else if ($(this).val() == "c"){
 							$(".status .value").html("Why would you do that? No, seriously. This is only a game, but what the fuck? Are you OK? <input id='KeepFishingButton' type='submit' class='button' value='Continue fishing'>");							
+							$(".status .value").show("slow");
 							$(".status .value input").show("slow").css('display', 'block');
-							$(this).addClass("active");
-							$(".answers a").not(this).addClass("unactive");								
+							$(".answers input").prop("disabled", true);									
+							$(".answers input").not(this).addClass("disabled");								
 							eventXp = -50;
 							eventCastListMessage = "You caught a pregnant fish. You chose to stab her for no reason. May God have mercy on your soul";
 							dickPoints = dickPoints + 1;
