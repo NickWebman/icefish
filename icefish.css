@@ -244,6 +244,15 @@ h2.headline {
 	overflow: auto;
 }
 
+.stuff .the-stuff {
+	clear: both;
+    padding-top: 10px;
+}
+
+.stuff .the-stuff span.value {
+	font-weight: 700;
+}
+
 .livewell .the-fish {
     padding: 0 15px 0 1px;
     margin: 40px 0 0 0;
